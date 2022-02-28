@@ -1,3 +1,4 @@
+Install the Packages.
 ```R
 install.packages("dplyr")
 install.packages("tidyr")
@@ -6,101 +7,8 @@ install.packages("data.table")
 install.packages("tidyverse")
 install.packages("reshape2")
 ```
-
-    also installing the dependency 'rlang'
-    
-    
-
-    
-      There are binary versions available but the source versions are later:
-          binary source needs_compilation
-    rlang 0.4.11  1.0.1              TRUE
-    dplyr  1.0.6  1.0.8              TRUE
-    
-      Binaries will be installed
-    package 'rlang' successfully unpacked and MD5 sums checked
-    package 'dplyr' successfully unpacked and MD5 sums checked
-    
-    The downloaded binary packages are in
-    	C:\Users\mitch\AppData\Local\Temp\RtmpUtQXOi\downloaded_packages
-    
-      There is a binary version available but the source version is later:
-          binary source needs_compilation
-    tidyr  1.1.3  1.2.0              TRUE
-    
-      Binaries will be installed
-    package 'tidyr' successfully unpacked and MD5 sums checked
-    
-    The downloaded binary packages are in
-    	C:\Users\mitch\AppData\Local\Temp\RtmpUtQXOi\downloaded_packages
-    
-      There is a binary version available but the source version is later:
-            binary source needs_compilation
-    ggplot2  3.3.3  3.3.5             FALSE
-    
-    
-
-    installing the source package 'ggplot2'
-    
-    
-
-    
-      There is a binary version available but the source version is later:
-               binary source needs_compilation
-    data.table 1.14.0 1.14.2              TRUE
-    
-      Binaries will be installed
-    package 'data.table' successfully unpacked and MD5 sums checked
-    
-    The downloaded binary packages are in
-    	C:\Users\mitch\AppData\Local\Temp\RtmpUtQXOi\downloaded_packages
-    
-
-    also installing the dependencies 'xfun', 'tinytex', 'knitr', 'rmarkdown', 'jsonlite', 'reprex'
-    
-    
-
-    
-      There are binary versions available but the source versions are later:
-              binary source needs_compilation
-    xfun        0.22   0.29              TRUE
-    tinytex     0.31   0.37             FALSE
-    knitr       1.33   1.37             FALSE
-    rmarkdown    2.8   2.11             FALSE
-    jsonlite   1.7.2  1.8.0              TRUE
-    reprex     2.0.0  2.0.1             FALSE
-    
-      Binaries will be installed
-    package 'xfun' successfully unpacked and MD5 sums checked
-    package 'jsonlite' successfully unpacked and MD5 sums checked
-    
-
-    Warning message:
-    "cannot remove prior installation of package 'jsonlite'"Warning message in file.copy(savedcopy, lib, recursive = TRUE):
-    "problem copying D:\PyCharm\Anaconda\Lib\R\library\00LOCK\jsonlite\libs\x64\jsonlite.dll to D:\PyCharm\Anaconda\Lib\R\library\jsonlite\libs\x64\jsonlite.dll: Permission denied"Warning message:
-    "restored 'jsonlite'"
-
-    package 'tidyverse' successfully unpacked and MD5 sums checked
-    
-    The downloaded binary packages are in
-    	C:\Users\mitch\AppData\Local\Temp\RtmpUtQXOi\downloaded_packages
-    
-
-    installing the source packages 'tinytex', 'knitr', 'rmarkdown', 'reprex'
-    
-    Warning message in install.packages("tidyverse"):
-    "installation of package 'tinytex' had non-zero exit status"Warning message in install.packages("tidyverse"):
-    "installation of package 'knitr' had non-zero exit status"Warning message in install.packages("tidyverse"):
-    "installation of package 'rmarkdown' had non-zero exit status"Warning message in install.packages("tidyverse"):
-    "installation of package 'reprex' had non-zero exit status"
-
-    package 'reshape2' successfully unpacked and MD5 sums checked
-    
-    The downloaded binary packages are in
-    	C:\Users\mitch\AppData\Local\Temp\RtmpUtQXOi\downloaded_packages
-    
-
-
+Load the Packages.
+ 
 ```R
 library(dplyr)
 library(tidyr)
@@ -108,30 +16,8 @@ library(ggplot2)
 library(reshape2)
 clim_data = read.csv("D:/Downloads/GoogleTemps/GlobalLandTemperaturesByState.csv", header = TRUE)
 ```
-
-    Warning message:
-    "package 'dplyr' was built under R version 3.6.3"
-    Attaching package: 'dplyr'
-    
-    The following objects are masked from 'package:stats':
-    
-        filter, lag
-    
-    The following objects are masked from 'package:base':
-    
-        intersect, setdiff, setequal, union
-    
-    Warning message:
-    "package 'tidyr' was built under R version 3.6.3"Warning message:
-    "package 'reshape2' was built under R version 3.6.3"
-    Attaching package: 'reshape2'
-    
-    The following object is masked from 'package:tidyr':
-    
-        smiths
-    
-    
-
+ 
+Filter the data to the US and separate dt into Year, Month, and Day.
 
 ```R
 clim_data %>%
@@ -179,7 +65,7 @@ tail(clim_data)
 </table>
 
 
-
+Filter by a more "recent" year and group by the year for easy visualization.
 
 ```R
 clim_data %>%
@@ -203,7 +89,7 @@ head(clim_data2)
 </table>
 
 
-
+Plot the the data to visualize temperature change in the US. 
 
 ```R
 qplot(Year, Temp, data=clim_data2, main="Average Temperature 1900-2013", geom=c("point","smooth")) + aes(color = Temp) + scale_color_gradient(low="grey", high="red")
@@ -216,8 +102,7 @@ qplot(Year, Temp, data=clim_data2, main="Average Temperature 1900-2013", geom=c(
     
 ![png](output_6_1.png)
     
-
-
+Group the data by state and year. This step will make it easy to pull specific states out of the data. I am going to look at the PNW.
 
 ```R
 clim_data %>%
@@ -369,7 +254,7 @@ clim_data2000
 </table>
 
 
-
+Merge the two datasets for visualization.
 
 ```R
 df <- merge(clim_data1900, clim_data2000, by='region')
@@ -435,7 +320,7 @@ df
 </table>
 
 
-
+Rename some of the columns. 
 
 ```R
 df %>%
@@ -507,7 +392,7 @@ df
 </table>
 
 
-
+Point plot for 1900 and 2000. Good way to see how the temperatures have varied over a century.
 
 ```R
 ggplot(data=df) +
@@ -524,7 +409,7 @@ ylab('State')
 ![png](output_14_0.png)
     
 
-
+Filter by the PNW. In this case I am defining the PNW as Washington, Oregon, Montana, and Idaho.
 
 ```R
 clim_data1 %>%
@@ -602,7 +487,7 @@ pnw_data
 </table>
 
 
-
+Finding the range and difference between max and min values for the entire duration of the dataset.
 
 ```R
 pnw_data %>%
@@ -650,7 +535,7 @@ print(max(mo_data$value) - min(mo_data$value))
     [1] -7.710000  9.157429
     [1] 16.86743
     
-
+Plot the data to visualize the differences. Geom_smooth will smooth out some of the outliers. 
 
 ```R
 ggplot(pnw_data)+
@@ -668,7 +553,7 @@ ylab('Temperature in Celsius')
 ![png](output_20_1.png)
     
 
-
+Let's find more recent data and see how it compares. I am going to find the difference between the max and min values form 2000-2013. The warmest value for each state falls in 2013 so we can take the max - min to find the rate at which the state is warming. We will see that there is a low point for temps in 2008 and 2009.
 
 ```R
 wa_data %>%
@@ -780,7 +665,7 @@ print(latest_mo)
     [38;5;250m13[39m  [4m2[24m012 montana  7.00
     [38;5;250m14[39m  [4m2[24m013 montana  8.46
     
-
+Graph the Data. Montana and Idaho are cooler than Washington and Oregon (which is expected), however, the graph and value shows that Montana is warming the quickest of the 4 states.
 
 ```R
 pnw_data %>%
@@ -800,7 +685,7 @@ ylab('Temperature in Celsius')
 ![png](output_25_1.png)
     
 
-
+Put these values in a table for visualization. 
 
 ```R
 slope <- c(2.95, 2.69, 3.11, 3.31)
@@ -822,7 +707,7 @@ df2
 </table>
 
 
-
+Box plot to see the difference more clearly.
 
 ```R
 ggplot(data = df2, aes(x=state,y=slope,fill=state))+
@@ -834,7 +719,9 @@ geom_bar(stat='identity')
 ![png](output_27_0.png)
     
 
+Now lets check how fast the PNW is warming compared to the US as a whole. 
 
+Here we will grab US data for 2000-2013.
 
 ```R
 clim_data %>%
@@ -866,7 +753,7 @@ new_us
 </table>
 
 
-
+Grabbing the same data as the above, but specifically for the PNW. 
 
 ```R
 clim_data %>%
@@ -899,8 +786,7 @@ pnw2000
 </tbody>
 </table>
 
-
-
+Graph it.
 
 ```R
 ggplot()+
@@ -917,7 +803,7 @@ geom_smooth(data=pnw2000, aes(x=Year, y=Temp), color='blue')
 ![png](output_30_1.png)
     
 
-
+Find the difference between the max and min values. Again, we see the highest value in 2013 and a low point around 2008-2009. 
 
 ```R
 print(max(new_us$Temp) - min(new_us$Temp))
@@ -933,7 +819,7 @@ print(max(pnw2000$Temp) - min(pnw2000$Temp))
 
     [1] 2.95234
     
-
+Calculate percent difference. According to this data, the PNW is warming 53.7% faster than the US as a whole. To take this further, I would be interested in gather newer data to see if this trend stays. 
 
 ```R
 per_diff <- (abs(1.921299 - 2.95234)/1.921299) * 100
